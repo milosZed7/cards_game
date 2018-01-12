@@ -1,0 +1,315 @@
+.background() {
+    @first: navy;
+    @second: maroon;
+    @back: sienna;
+    background-color: @back;
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px, 0 0, 0 0;
+    background-image: radial-gradient(circle at center, @first 10%, transparent 10%), radial-gradient(circle at center, @first 10%, transparent 10%), linear-gradient(45deg, transparent 49%, @second 49%, @second 51%, transparent 51%), linear-gradient(-45deg, transparent 49%, @second 49%, @second 51%, transparent 51%);
+}
+
+.button-background() {
+    background-image: linear-gradient(0deg, darkred, firebrick);
+}
+
+.button-inside-background(@url) {
+    background-image: url(@url); //linear-gradient(0deg,firebrick,darkred);
+    background-size: 100%;
+}
+
+.disable-select() {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+body {
+    margin: 0;
+}
+
+.container {
+    .background;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    .open-card,
+    .close-card,
+    .great-lower-button {
+        top: 50%;
+        position: absolute;
+        margin-top: -240/2px;
+    }
+    .open-card {
+        width: 40%;
+        left: 20%;
+    }
+    .close-card {
+        width: 40%;
+        left: 60%;
+    }
+    .great-lower-button {
+        top: 55%;
+        width: 20%;
+        left: 42%;
+    }
+}
+
+.whole-card {
+    z-index: 3;
+    transition: transform 0.1s ease-in-out;
+    box-sizing: border-box;
+    perspective: 750px;
+    position: absolute;
+    height: 240px;
+    width: 160px;
+    &:hover {
+        transform: scale(1.01);
+    }
+    .back-card,
+    .front-card-black,
+    .front-card-red {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        border: 5px solid white;
+        border-radius: 5%;
+        box-shadow: 0px 0px 0 1px rgba(0, 0, 0, 0.1);
+    }
+    .back-card {
+        -mz-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        background-size: 34px 34px, 34px 34px;
+        background-repeat: repeat;
+        background-position: 0 0, 0px 0px;
+        background-image: linear-gradient(45deg, red 15%, white 15%, white 25%, red 25%, red 30%, transparent 30%, transparent 70%, red 70%, red 75%, white 75%, white 85%, red 85%), linear-gradient(135deg, red 20%, white 20%);
+    }
+    .front-card-black {
+        color: black;
+    }
+    .front-card-red {
+        color: red;
+    }
+    .front-card-black,
+    .front-card-red {
+        .disable-select;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+        background-color: white;
+        font-size: 2.1em;
+        font-family: Arial;
+    }
+}
+
+.button-shape() {
+    display: block;
+    position: relative;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 50px;
+    width: 90px;
+    border-radius: 15px;
+    border: none;
+    .button-background;
+    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.3), 0px 6px 0px 0px darkred;
+    &:active {
+        top: 4px;
+        box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.3), 0px 2px 0px 0px darkred;
+    }
+    &:focus {
+        outline: none;
+    }
+}
+
+.great-lower-button {
+    .up,
+    .down {
+        .button-shape;
+        &::after {
+            color: white;
+            font-size: 100%;
+            font-weight: bold;
+            display: block;
+            content: '';
+            position: relative;
+            height: 30%;
+            width: 20%;
+            border-radius: 50%;
+            left: 33px;
+            box-shadow: inset 0px 1px 0 0px rgba(0, 0, 0, 0.5), 0px 1px 0 0px darkred;
+        }
+        &:active::after {
+            top: -4px;
+            box-shadow: inset 0px 1px 0 0px firebrick, 0px 3px 0 0px rgba(0, 0, 0, 0.6), 0px 6px 3px 0px rgba(0, 0, 0, 0.2);
+        }
+    }
+    .up {
+        margin-bottom: 10%;
+        &::after {
+            .button-inside-background('img/up-arrow-icon.svg');
+        }
+    }
+    .down {
+        &::after {
+            .button-inside-background('img/down-arrow-icon.svg');
+        }
+    }
+}
+
+.open-card {
+    .whole-card {
+        .front-card-black,
+        .front-card-red {
+            z-index: 2;
+        }
+        .back-card {
+            z-index: 1;
+        }
+    }
+}
+
+.close-card {
+    .whole-card {
+        .front-card-black,
+        .front-card-red {
+            z-index: 1;
+        }
+        .back-card {
+            z-index: 2;
+        }
+    }
+}
+
+.flip-card {
+    animation-name: flipCard;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: both;
+}
+
+.translate-card {
+    animation-name: translateCard;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: both;
+}
+
+@keyframes translateCard {
+    from {
+        left:0%;
+    }
+    to {
+        left: -100%;
+    }
+}
+
+@keyframes flipCard {
+    from {
+        transform: rotate3d(0, 1, 0, 0deg);
+    }
+    to {
+        transform: rotate3d(0, 1, 0, 180deg);
+    }
+}
+
+.front-card-number-position(@xDegNumber, @yDegNumber, @xDegReverse, @yDegReverse, @flexDirection){
+    .front-card-black,
+    .front-card-red {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: @flexDirection;
+        .card-number {
+            align-self: flex-start;
+            transform: rotateX(@xDegNumber) rotateY(@yDegNumber);
+        }
+        .card-reverse-number {
+            align-self: flex-end;
+            transform: rotateX(@xDegReverse) rotateY(@yDegReverse);
+        }
+    }
+}
+.correct-card-number-position{
+    .front-card-number-position(0,0,180deg,180deg,column);
+}
+
+.open-card {
+    .whole-card {
+        //transition: transform 0.5s ease;
+        .front-card-number-position(0,0,180deg,180deg,column);
+    }
+}
+
+.close-card {
+    .whole-card {
+        .front-card-number-position(180deg,0,0,180deg,column-reverse);
+    }
+}
+.font-style(){
+    font-size: 4em;
+    font-family: Arial, Helvetica, sans-serif;
+    color: orangered;
+    text-shadow: 2px 2px 1px darken(orangered, 20%);
+}
+.game-over {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.1);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    left: -100%;
+    z-index: 10;
+    .disable-select;
+    .content {
+        .font-style;
+    }
+    .game-over-btn {
+        .button-shape;
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+        font-size: 1.5em;
+        width: 170px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+}
+
+.game-over-slide {
+    animation-name: game-over-slide;
+    animation-fill-mode: both;
+    animation-duration: 2.5s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease;
+}
+
+@keyframes game-over-slide {
+    from {
+        left: -100%;
+    }
+    to {
+        left: 0%;
+    }
+}
+
+.counter{
+    position: absolute;
+    .font-style;
+    z-index: 1;
+    .disable-select;
+}
+
+.correct-cards{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 20%;
+    height: 50%;
+}

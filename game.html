@@ -1,0 +1,40 @@
+<html>
+
+<head>
+    <link href="game.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="counter">Your score: 0</div>
+    <div class="game-over">
+        <div class="content">Game over!!!</div>
+        <button class="game-over-btn">Start Game</button>
+    </div>
+    <div class="correct-cards"></div>
+    <div class="container">
+
+        <div class="open-card"></div>
+        <div class="great-lower-button">
+            <button class="up"></button>
+            <button class="down"></button>
+        </div>
+        <div class="close-card"></div>
+
+        <audio class="game-over-sound">
+            <source src="audio/game-over2.wav" type="audio/wav">
+          </audio>
+        <audio class="card-flip-sound">
+            <source src="audio/card-flip.wav" type="audio/wav">
+          </audio>
+        <audio class="card-move-sound">
+            <source src="audio/dealing-card.wav" type="audio/wav">
+          </audio>
+        <audio class="card-move2-sound">
+            <source src="audio/dealing-card.wav" type="audio/wav">
+          </audio>
+        <script src="card.js"></script>
+        <script src="renderer.js"></script>
+        <script src="main.js"></script>
+</body>
+
+</html>

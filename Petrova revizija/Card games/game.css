@@ -1,0 +1,313 @@
+body {
+  margin: 0;
+}
+.container {
+  background-color: sienna;
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px, 0 0, 0 0;
+  background-image: radial-gradient(circle at center, navy 10%, transparent 10%), radial-gradient(circle at center, navy 10%, transparent 10%), linear-gradient(45deg, transparent 49%, maroon 49%, maroon 51%, transparent 51%), linear-gradient(-45deg, transparent 49%, maroon 49%, maroon 51%, transparent 51%);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.container .open-card,
+.container .close-card,
+.container .great-lower-button {
+  top: 50%;
+  position: absolute;
+  margin-top: -120px;
+}
+.container .open-card {
+  width: 40%;
+  left: 20%;
+}
+.container .close-card {
+  width: 40%;
+  left: 60%;
+}
+.container .great-lower-button {
+  top: 55%;
+  width: 20%;
+  left: 42%;
+}
+.whole-card {
+  z-index: 3;
+  transition: transform 0.1s ease-in-out;
+  box-sizing: border-box;
+  perspective: 750px;
+  position: absolute;
+  height: 240px;
+  width: 160px;
+}
+.whole-card:hover {
+  transform: scale(1.01);
+}
+.whole-card .back-card,
+.whole-card .front-card-black,
+.whole-card .front-card-red {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border: 5px solid white;
+  border-radius: 5%;
+  box-shadow: 0px 0px 0 1px rgba(0, 0, 0, 0.1);
+}
+.whole-card .back-card {
+  -mz-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background-size: 34px 34px, 34px 34px;
+  background-repeat: repeat;
+  background-position: 0 0, 0px 0px;
+  background-image: linear-gradient(45deg, red 15%, white 15%, white 25%, red 25%, red 30%, transparent 30%, transparent 70%, red 70%, red 75%, white 75%, white 85%, red 85%), linear-gradient(135deg, red 20%, white 20%);
+}
+.whole-card .front-card-black {
+  color: black;
+}
+.whole-card .front-card-red {
+  color: red;
+}
+.whole-card .front-card-black,
+.whole-card .front-card-red {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  background-color: white;
+  font-size: 2.1em;
+  font-family: Arial;
+}
+.great-lower-button .up,
+.great-lower-button .down {
+  display: block;
+  position: relative;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 50px;
+  width: 90px;
+  border-radius: 15px;
+  border: none;
+  background-image: linear-gradient(0deg, darkred, firebrick);
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.3), 0px 6px 0px 0px darkred;
+}
+.great-lower-button .up:active,
+.great-lower-button .down:active {
+  top: 4px;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.3), 0px 2px 0px 0px darkred;
+}
+.great-lower-button .up:focus,
+.great-lower-button .down:focus {
+  outline: none;
+}
+.great-lower-button .up::after,
+.great-lower-button .down::after {
+  color: white;
+  font-size: 100%;
+  font-weight: bold;
+  display: block;
+  content: '';
+  position: relative;
+  height: 30%;
+  width: 20%;
+  border-radius: 50%;
+  left: 33px;
+  box-shadow: inset 0px 1px 0 0px rgba(0, 0, 0, 0.5), 0px 1px 0 0px darkred;
+}
+.great-lower-button .up:active::after,
+.great-lower-button .down:active::after {
+  top: -4px;
+  box-shadow: inset 0px 1px 0 0px firebrick, 0px 3px 0 0px rgba(0, 0, 0, 0.6), 0px 6px 3px 0px rgba(0, 0, 0, 0.2);
+}
+.great-lower-button .up {
+  margin-bottom: 10%;
+}
+.great-lower-button .up::after {
+  background-image: url('img/up-arrow-icon.svg');
+  background-size: 100%;
+}
+.great-lower-button .down::after {
+  background-image: url('img/down-arrow-icon.svg');
+  background-size: 100%;
+}
+.open-card .whole-card .front-card-black,
+.open-card .whole-card .front-card-red {
+  z-index: 2;
+}
+.open-card .whole-card .back-card {
+  z-index: 1;
+}
+.close-card .whole-card .front-card-black,
+.close-card .whole-card .front-card-red {
+  z-index: 1;
+}
+.close-card .whole-card .back-card {
+  z-index: 2;
+}
+.flip-card {
+  animation-name: flipCard;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+}
+.translate-card {
+  animation-name: translateCard;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+}
+@keyframes translateCard {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -100%;
+  }
+}
+@keyframes flipCard {
+  from {
+    transform: rotate3d(0, 1, 0, 0deg);
+  }
+  to {
+    transform: rotate3d(0, 1, 0, 180deg);
+  }
+}
+.correct-card-number-position .front-card-black,
+.correct-card-number-position .front-card-red {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.correct-card-number-position .front-card-black .card-number,
+.correct-card-number-position .front-card-red .card-number {
+  align-self: flex-start;
+  transform: rotateX(0) rotateY(0);
+}
+.correct-card-number-position .front-card-black .card-reverse-number,
+.correct-card-number-position .front-card-red .card-reverse-number {
+  align-self: flex-end;
+  transform: rotateX(180deg) rotateY(180deg);
+}
+.open-card .whole-card .front-card-black,
+.open-card .whole-card .front-card-red {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.open-card .whole-card .front-card-black .card-number,
+.open-card .whole-card .front-card-red .card-number {
+  align-self: flex-start;
+  transform: rotateX(0) rotateY(0);
+}
+.open-card .whole-card .front-card-black .card-reverse-number,
+.open-card .whole-card .front-card-red .card-reverse-number {
+  align-self: flex-end;
+  transform: rotateX(180deg) rotateY(180deg);
+}
+.close-card .whole-card .front-card-black,
+.close-card .whole-card .front-card-red {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column-reverse;
+}
+.close-card .whole-card .front-card-black .card-number,
+.close-card .whole-card .front-card-red .card-number {
+  align-self: flex-start;
+  transform: rotateX(180deg) rotateY(0);
+}
+.close-card .whole-card .front-card-black .card-reverse-number,
+.close-card .whole-card .front-card-red .card-reverse-number {
+  align-self: flex-end;
+  transform: rotateX(0) rotateY(180deg);
+}
+.game-over {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.1);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  left: -100%;
+  z-index: 10;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+.game-over .content {
+  font-size: 4em;
+  font-family: Arial, Helvetica, sans-serif;
+  color: orangered;
+  text-shadow: 2px 2px 1px #992900;
+}
+.game-over .game-over-btn {
+  display: block;
+  position: relative;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 50px;
+  width: 90px;
+  border-radius: 15px;
+  border: none;
+  background-image: linear-gradient(0deg, darkred, firebrick);
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.3), 0px 6px 0px 0px darkred;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  font-size: 1.5em;
+  width: 170px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+.game-over .game-over-btn:active {
+  top: 4px;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.3), 0px 2px 0px 0px darkred;
+}
+.game-over .game-over-btn:focus {
+  outline: none;
+}
+.game-over-slide {
+  animation-name: game-over-slide;
+  animation-fill-mode: both;
+  animation-duration: 2.5s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease;
+}
+@keyframes game-over-slide {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 0%;
+  }
+}
+.counter {
+  position: absolute;
+  font-size: 4em;
+  font-family: Arial, Helvetica, sans-serif;
+  color: orangered;
+  text-shadow: 2px 2px 1px #992900;
+  z-index: 1;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+.correct-cards {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 20%;
+  height: 50%;
+}
